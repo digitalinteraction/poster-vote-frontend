@@ -6,7 +6,7 @@ It is a [PWA](https://developers.google.com/web/progressive-web-apps/)
 served inside a single `index.html` file which is compiled through the
 [vue cli](https://cli.vuejs.org/) using [Webpack](https://webpack.js.org/).
 
-[What is PosterVote?](https://github.com/poster-vote/about)
+[What is PosterVote?](https://github.com/digitalinteraction/poster-vote)
 
 <!-- toc-head -->
 
@@ -167,4 +167,4 @@ services:
 
 ---
 
-> The code on https://github.com/poster-vote/vue-frontend is a mirror of https://openlab.ncl.ac.uk/gitlab/poster-vote/vue-frontend
+> The code on https://github.com/digitalinteraction/poster-vote-frontend is a mirror of https://openlab.ncl.ac.uk/gitlab/poster-vote/vue-frontend
