@@ -5,8 +5,8 @@ footer.footer
       span Made by 
       a(href="https://openlab.ncl.ac.uk", target="_blank") Open Lab
     p.links
-      a(href="https://github.com/poster-vote/about", target="_blank") Getting Devices
-      a(href="https://github.com/poster-vote", target="_blank") Open Source
+      a(href="https://github.com/digitalinteraction/poster-vote", target="_blank") Getting Devices
+      a(href="https://github.com/digitalinteraction/poster-vote", target="_blank") Open Source
       span.version  version {{appVersion}}
 </template>
 
