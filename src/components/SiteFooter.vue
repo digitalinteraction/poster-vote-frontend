@@ -20,8 +20,8 @@ export default {
     },
     appVersion() {
       return process.env.VUE_APP_VERSION
-    }
-  }
+    },
+  },
 }
 </script>
 

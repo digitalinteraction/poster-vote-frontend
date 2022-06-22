@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Home from './views/AppHome.vue'
 
 import {
   ROUTE_HOME,
   ROUTE_LIST_POSTERS,
   ROUTE_SHOW_POSTER,
   ROUTE_ADD_POSTER,
-  ROUTE_EDIT_POSTER
+  ROUTE_EDIT_POSTER,
 } from '@/const'
 
 Vue.use(Router)
@@ -20,45 +20,45 @@ const router = new Router({
       path: '/',
       name: ROUTE_HOME,
       component: Home,
-      meta: { title: 'Home' }
+      meta: { title: 'Home' },
     },
     {
       path: '/posters',
       name: ROUTE_LIST_POSTERS,
       component: () =>
         import(/* webpackChunkName: "posters" */ './views/ListPosters.vue'),
-      meta: { title: 'Your Posters' }
+      meta: { title: 'Your Posters' },
     },
     {
       path: '/posters/add',
       name: ROUTE_ADD_POSTER,
       component: () =>
         import(/* webpackChunkName: "posters" */ './views/AddPoster.vue'),
-      meta: { title: 'Add Poster' }
+      meta: { title: 'Add Poster' },
     },
     {
       path: '/posters/:id',
       name: ROUTE_SHOW_POSTER,
       component: () =>
         import(/* webpackChunkName: "posters" */ './views/ShowPoster.vue'),
-      meta: { title: 'View Poster' }
+      meta: { title: 'View Poster' },
     },
     {
       path: '/posters/:id/edit',
       name: ROUTE_EDIT_POSTER,
       component: () =>
         import(/* webpackChunkName: "posters" */ './views/EditPoster.vue'),
-      meta: { title: 'Edit Poster' }
-    }
-  ]
+      meta: { title: 'Edit Poster' },
+    },
+  ],
 })
 
-router.afterEach(route => {
+router.afterEach((route) => {
   const brand = 'PosterVote'
   const pageTitle = route.meta && route.meta.title
 
   Vue.nextTick(() => {
-    document.title = [pageTitle, brand].filter(s => s).join(' | ')
+    document.title = [pageTitle, brand].filter((s) => s).join(' | ')
   })
 })
 

@@ -57,7 +57,7 @@ import {
   MUTATION_CURRENT_USER,
   ROUTE_SHOW_POSTER,
   ROUTE_ADD_POSTER,
-  ROUTE_HOME
+  ROUTE_HOME,
 } from '@/const'
 
 export default {
@@ -67,11 +67,13 @@ export default {
       return this.$store.state.currentUser
     },
     posters() {
-      return this.$store.state.posters.filter(p => p.creator_hash === this.user)
+      return this.$store.state.posters.filter(
+        (p) => p.creator_hash === this.user
+      )
     },
     addPosterRoute() {
       return { name: ROUTE_ADD_POSTER }
-    }
+    },
   },
   mounted() {
     this.fetchPosters()
@@ -94,8 +96,8 @@ export default {
     async fetchPosters() {
       let { data = [] } = await sharedClient.get('posters')
       this.$store.commit(MUTATION_POSTERS, data)
-    }
-  }
+    },
+  },
 }
 </script>
 

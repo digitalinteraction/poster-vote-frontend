@@ -78,7 +78,7 @@ import {
   ROUTE_LIST_POSTERS,
   ROUTE_EDIT_POSTER,
   MUTATION_POSTERS,
-  MUTATION_DELETE_POSTER
+  MUTATION_DELETE_POSTER,
 } from '@/const'
 
 export default {
@@ -86,7 +86,7 @@ export default {
   data: () => ({
     votes: null,
     options: null,
-    lastUpdate: null
+    lastUpdate: null,
   }),
   computed: {
     posterId() {
@@ -105,7 +105,7 @@ export default {
       return this.poster ? this.poster.question : '~'
     },
     filteredOptions() {
-      return !this.options ? [] : this.options.filter(o => o.text)
+      return !this.options ? [] : this.options.filter((o) => o.text)
     },
     totalVotes() {
       if (!this.hasVotes) return 0
@@ -117,7 +117,7 @@ export default {
     },
     hasVotes() {
       const validVotes = this.votes.length === this.options.length
-      const hasValues = this.votes.some(v => v.vote > 0)
+      const hasValues = this.votes.some((v) => v.vote > 0)
       return this.votes && this.options && validVotes && hasValues
     },
     currentUser() {
@@ -128,7 +128,7 @@ export default {
     },
     editRoute() {
       return { name: ROUTE_EDIT_POSTER, params: { id: this.posterId } }
-    }
+    },
   },
   mounted() {
     this.fetchPoster()
@@ -143,10 +143,10 @@ export default {
       } else {
         SplashMessageBus.$emit('message', {
           type: 'danger',
-          body: `Couldn't find poster`
+          body: `Couldn't find poster`,
         })
         this.$router.replace({
-          name: this.currentUser ? ROUTE_LIST_POSTERS : ROUTE_HOME
+          name: this.currentUser ? ROUTE_LIST_POSTERS : ROUTE_HOME,
         })
       }
     },
@@ -174,8 +174,8 @@ export default {
         this.$store.commit(MUTATION_DELETE_POSTER, this.posterId)
         this.$router.push({ name: ROUTE_LIST_POSTERS })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

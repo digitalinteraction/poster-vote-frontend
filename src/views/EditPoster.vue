@@ -54,7 +54,7 @@ import { sharedClient } from '@/services/ApiService'
 import {
   ROUTE_SHOW_POSTER,
   ROUTE_LIST_POSTERS,
-  MUTATION_POSTERS
+  MUTATION_POSTERS,
 } from '@/const'
 import { SplashMessageBus } from '@/busses'
 
@@ -75,7 +75,7 @@ export default {
       posterEdit: null,
       optionsEdit: null,
       questionLength,
-      optionLength
+      optionLength,
     }
   },
   computed: {
@@ -93,8 +93,10 @@ export default {
     },
     canSubmit() {
       if (!this.posterEdit || !this.optionsEdit) return false
-      const hasOptions = this.optionsEdit.filter(o => o !== '').length > 1
-      const validOptions = this.optionsEdit.every(o => o.length <= optionLength)
+      const hasOptions = this.optionsEdit.filter((o) => o !== '').length > 1
+      const validOptions = this.optionsEdit.every(
+        (o) => o.length <= optionLength
+      )
 
       return (
         this.posterEdit.name &&
@@ -107,7 +109,7 @@ export default {
     },
     posterRoute() {
       return { name: ROUTE_SHOW_POSTER, params: { id: this.posterId } }
-    }
+    },
   },
   mounted() {
     this.fetchPoster()
@@ -122,14 +124,14 @@ export default {
         data.colour = `#${data.colour}`
 
         this.$store.commit(MUTATION_POSTERS, [data])
-        this.options = data.options.map(o => o.text)
+        this.options = data.options.map((o) => o.text)
 
         this.posterEdit = { ...data }
         this.optionsEdit = Array.from(this.options)
       } else {
         SplashMessageBus.$emit('message', {
           type: 'danger',
-          body: `Couldn't find that poster`
+          body: `Couldn't find that poster`,
         })
         this.$router.replace({ name: ROUTE_LIST_POSTERS })
       }
@@ -140,12 +142,12 @@ export default {
 
       let options = this.optionsEdit.map((text, i) => ({
         value: i + 1,
-        text
+        text,
       }))
 
       let { meta, data } = await sharedClient.put(this.posterURI, {
         ...this.posterEdit,
-        options: options
+        options: options,
       })
 
       if (meta.success) {
@@ -156,8 +158,8 @@ export default {
         this.state = 'input'
         this.messages = meta.messages
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

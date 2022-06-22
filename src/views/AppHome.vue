@@ -86,18 +86,18 @@ import { SplashMessageBus } from '@/busses'
 const State = {
   input: 'input',
   working: 'working',
-  sent: 'sent'
+  sent: 'sent',
 }
 
 export default {
   components: {
     SiteNav,
     CenteredBox,
-    SiteFooter
+    SiteFooter,
   },
   data: () => ({
     state: State.input,
-    email: ''
+    email: '',
   }),
   computed: {
     user() {
@@ -111,7 +111,7 @@ export default {
     },
     checkedLogin() {
       return this.$store.state.checkedLogin
-    }
+    },
   },
   methods: {
     async submitLogin() {
@@ -120,8 +120,8 @@ export default {
       let { meta } = await sharedClient.get('auth/email/request', {
         params: {
           email: this.email,
-          mode: 'cookie'
-        }
+          mode: 'cookie',
+        },
       })
 
       this.state = meta.success ? State.sent : State.input
@@ -129,14 +129,14 @@ export default {
       if (!meta.success) {
         SplashMessageBus.$emit('message', {
           type: 'danger',
-          body: 'Bad login, please try again'
+          body: 'Bad login, please try again',
         })
       }
     },
     resetForm() {
       this.state = State.input
-    }
-  }
+    },
+  },
 }
 </script>
 

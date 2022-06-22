@@ -74,20 +74,20 @@ export default {
     poster: { type: Object, required: true },
     options: { type: Array, required: true },
     optionLength: { type: Number, required: true },
-    questionLength: { type: Number, required: true }
+    questionLength: { type: Number, required: true },
   },
   data: () => ({}),
   computed: {
     questionClasses() {
       return {
-        'is-danger': this.poster.question.length > this.questionLength
+        'is-danger': this.poster.question.length > this.questionLength,
       }
-    }
+    },
   },
   methods: {
     optionClasses(o) {
       return {
-        'is-danger': o.length > this.optionLength
+        'is-danger': o.length > this.optionLength,
       }
     },
     onOptionChange(i, e) {
@@ -97,9 +97,10 @@ export default {
       return `e.g. Option ${letters[i % letters.length]}`
     },
     shuffleColour() {
+      // eslint-disable-next-line vue/no-mutating-props
       this.poster.colour = randomColour()
-    }
-  }
+    },
+  },
 }
 </script>
 

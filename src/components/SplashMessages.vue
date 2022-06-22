@@ -13,7 +13,7 @@ import { SplashMessageBus } from '@/busses'
 
 let allMessages = []
 
-SplashMessageBus.$on('message', message => {
+SplashMessageBus.$on('message', (message) => {
   if (typeof message === 'string') message = { body: message }
   const { body, type = 'success', duration = 4000 } = message
   const expiry = new Date().getTime() + duration
@@ -23,7 +23,7 @@ SplashMessageBus.$on('message', message => {
 export default {
   data: () => ({
     timerId: null,
-    messages: []
+    messages: [],
   }),
   mounted() {
     this.timerId = setInterval(() => this.tickMessage(), 1000)
@@ -38,9 +38,9 @@ export default {
     },
     tickMessage() {
       const now = new Date().getTime()
-      this.messages = allMessages.filter(m => m.expiry > now)
-    }
-  }
+      this.messages = allMessages.filter((m) => m.expiry > now)
+    },
+  },
 }
 </script>
 

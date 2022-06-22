@@ -1,6 +1,6 @@
 import color from 'color'
 
-export const isEmail = str => /^\S+@\S+$/.test(str)
+export const isEmail = (str) => /^\S+@\S+$/.test(str)
 
 export function randomColour() {
   const hue = Math.floor(Math.random() * 360)

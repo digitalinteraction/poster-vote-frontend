@@ -4,7 +4,7 @@ export class ApiService {
   constructor(baseURL = '/') {
     this.client = axios.create({
       baseURL,
-      withCredentials: true
+      withCredentials: true,
     })
   }
 
@@ -12,7 +12,7 @@ export class ApiService {
   makeEnvelope(success, messages, data) {
     return {
       meta: { success, messages },
-      data
+      data,
     }
   }
 
@@ -39,7 +39,7 @@ export class ApiService {
       method: 'post',
       url,
       data,
-      ...config
+      ...config,
     })
   }
 
@@ -48,7 +48,7 @@ export class ApiService {
       method: 'put',
       url,
       data,
-      ...config
+      ...config,
     })
   }
 
@@ -57,7 +57,7 @@ export class ApiService {
     return this.makeRequest({
       method: 'delete',
       url,
-      ...config
+      ...config,
     })
   }
 }

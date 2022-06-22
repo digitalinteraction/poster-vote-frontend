@@ -71,18 +71,18 @@ export default {
         question: '',
         colour: randomColour(),
         owner: '',
-        contact: ''
+        contact: '',
       },
       options: ['', '', '', '', ''],
       hasSubmitted: false,
       questionLength,
-      optionLength
+      optionLength,
     }
   },
   computed: {
     canSubmit() {
-      const hasOptions = this.options.filter(o => o !== '').length > 1
-      const validOptions = this.options.every(o => o.length <= optionLength)
+      const hasOptions = this.options.filter((o) => o !== '').length > 1
+      const validOptions = this.options.every((o) => o.length <= optionLength)
 
       return (
         this.poster.name &&
@@ -99,9 +99,9 @@ export default {
         this.poster.question ||
         this.poster.owner ||
         this.poster.contact ||
-        this.options.some(o => o)
+        this.options.some((o) => o)
       )
-    }
+    },
   },
   beforeRouteLeave(to, from, next) {
     if (!this.hasChanges || this.hasSubmitted) return next()
@@ -118,7 +118,7 @@ export default {
       this.state = 'working'
       let { meta, data } = await sharedClient.post('posters', {
         ...this.poster,
-        options: this.options
+        options: this.options,
       })
       if (meta.success) {
         this.$store.commit(MUTATION_POSTERS, [data])
@@ -130,8 +130,8 @@ export default {
         this.state = 'input'
         this.messages = meta.messages
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

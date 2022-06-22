@@ -1,17 +1,19 @@
 process.env.VUE_APP_VERSION = require('./package.json').version
 
 module.exports = {
+  lintOnSave: true,
+  transpileDependencies: true,
   css: {
     loaderOptions: {
       sass: {
-        indentedSyntax: true,
-        data: '@import "~@/assets/sass/shared";'
-      }
-    }
+        // indentedSyntax: true,
+        additionalData: '@import "~@/assets/sass/shared"\n',
+      },
+    },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     // const svgRule = config.module.rule('svg')
     // svgRule.uses.clear()
     // svgRule.use('vue-svg-loader').loader('vue-svg-loader')
-  }
+  },
 }

@@ -23,7 +23,7 @@ let sizeList = [
   { width: 16, height: 16, name: 'favicon-16x16.png', radius: 3 },
   { width: 32, height: 32, name: 'favicon-32x32.png', radius: 6 },
   { width: 144, height: 144, name: 'msapplication-icon-144x144.png' },
-  { width: 150, height: 150, name: 'mstile-150x150.png' }
+  { width: 150, height: 150, name: 'mstile-150x150.png' },
 ]
 
 function roundEdges(width, height, radius) {
@@ -41,12 +41,12 @@ function roundEdges(width, height, radius) {
   await Promise.all(
     sizeList.map(({ name, width, height, radius = 0 }) => {
       let promise = sharp(inputFile).resize(width, height, {
-        background
+        background,
       })
 
       if (radius > 0) {
         promise = promise.overlayWith(roundEdges(width, height, radius), {
-          cutout: true
+          cutout: true,
         })
       }
 

@@ -29,11 +29,11 @@ export default {
       } catch (error) {
         SplashMessageBus.$emit('message', {
           type: 'danger',
-          body: `Can't connect to PosterVote, please try again later`
+          body: `Can't connect to PosterVote, please try again later`,
         })
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -43,18 +43,21 @@ export default {
 //
 
 @import "~bulma/sass/base/_all"
+@import "~bulma/sass/helpers/_all"
+
 
 // @import "~bulma/sass/elements/_all"
 @import "~bulma/sass/elements/box"
 @import "~bulma/sass/elements/button"
 @import "~bulma/sass/elements/container"
 @import "~bulma/sass/elements/content"
-@import "~bulma/sass/elements/form"
 @import "~bulma/sass/elements/image"
 @import "~bulma/sass/elements/notification"
 @import "~bulma/sass/elements/other"
 @import "~bulma/sass/elements/progress"
 @import "~bulma/sass/elements/title"
+
+@import "~bulma/sass/form/_all"
 
 // @import "~bulma/sass/components/_all"
 @import "~bulma/sass/components/breadcrumb"
