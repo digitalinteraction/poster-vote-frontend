@@ -4,7 +4,10 @@
   "private": true,
   "scripts": {
     "build": "vue-cli-service build --modern",
-    "serve": "vue-cli-service serve"
+    "serve": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
+    "format": "prettier --write */**/*.{js,vue,json,md}",
+    "gen-readme-toc": "md-toc -i"
   },
   "husky": {
     "hooks": {
@@ -45,6 +48,7 @@
     "pug-plain-loader": "^1.1.0",
     "sass": "^1.32.7",
     "sass-loader": "^12.6.0",
+    "sharp": "^0.30.7",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.14",
     "yaml-loader": "^0.8.0"

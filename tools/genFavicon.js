@@ -32,6 +32,8 @@ function roundEdges(width, height, radius) {
   )
 }
 
+// https://github.com/lovell/sharp/blob/master/README.md#stream
+
 ;(async () => {
   const resolve = (...paths) => join(__dirname, '..', ...paths)
   const inputFile = fs.readFileSync(resolve(path))
@@ -40,14 +42,12 @@ function roundEdges(width, height, radius) {
 
   await Promise.all(
     sizeList.map(({ name, width, height, radius = 0 }) => {
-      let promise = sharp(inputFile).resize(width, height, {
-        background,
-      })
+      let promise = sharp(inputFile).resize(width, height, { background })
 
       if (radius > 0) {
-        promise = promise.overlayWith(roundEdges(width, height, radius), {
-          cutout: true,
-        })
+        promise = promise.composite([
+          { input: roundEdges(width, height, radius), blend: 'dest-in' },
+        ])
       }
 
       return promise.toFile(resolve(outdir, name))

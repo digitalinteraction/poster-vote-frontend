@@ -82,7 +82,7 @@ npm run lint
 
 # Manually format code
 # -> This repo is setup to automatically format code on git-push
-npm run prettier
+npm run format
 
 # Manually build all assets (html, css, js & images)
 # -> Runs both the other build commands together
@@ -113,7 +113,7 @@ and [lint-staged](https://www.npmjs.com/package/lint-staged) npm packages to
 automatically format code whenever code is commited.
 This means that code that is pushed to the repo is always formatted to a consistent standard.
 
-You can manually run the formatter with `npm run prettier` if you want.
+You can manually run the formatter with `npm run format` if you want.
 
 Prettier is slightly configured in [.prettierrc.yml](/.prettierrc.yml)
 and also ignores files using [.prettierignore](/.prettierignore).
