@@ -50,7 +50,7 @@ section.section.poster-form: .container: .columns
     div
       .field.has-addons(v-for="option, i in options")
         .control
-          button.button.is-static(tabindex="-1") {{i + 1}}.
+          button.button.is-static(tabindex="-1") {{ 5 - i }}.
         .control.is-expanded
           input.input(
             type="text",
