@@ -52,7 +52,7 @@
                 span.name {{option.text}}
                 span.vote {{votesForOption(index)}}
                   |  – {{votesForOption(index) / totalVotes | percentage}}
-              progress.progress.is-large.is-info(
+              progress.progress.is-large(
                 :value="votesForOption(index)",
                 :max="totalVotes",
                 :style="{ '--theme': '#' + poster.colour }"
