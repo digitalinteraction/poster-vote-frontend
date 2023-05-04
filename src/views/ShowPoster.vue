@@ -31,7 +31,7 @@
             div: h4.title.is-4 Answers
             ul.is-size-5
               li(v-for="option, index in filteredOptions")
-                strong {{5 - index}}.
+                strong {{filteredOptions.length - index}}.
                 span  {{option.text}}
           
           .field.actions(v-if="isOwner")
