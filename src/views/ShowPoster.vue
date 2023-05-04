@@ -44,27 +44,41 @@
               button.button.is-danger(@click="destroyPoster")
                 | Archive
         .column
-          .poster-result(v-if="hasVotes")
+          .poster-result
             h2.result-title
               span Poster results
-            .option(v-for="option, index in filteredOptions")
-              label
-                span.name {{option.text}}
-                span.vote {{votesForOption(index)}}
-                  |  – {{votesForOption(index) / totalVotes | percentage}}
-              progress.progress.is-large(
-                :value="votesForOption(index)",
-                :max="totalVotes",
-                :style="{ '--theme': '#' + poster.colour }"
-              )
-            p.has-text-right(v-if="lastUpdate") Last scanned {{ lastUpdate | dateAgo }}
-          .message.is-warning.votes(v-else)
-            .message-header
-              p No votes ... yet
-            .message-body
-              p This poster's votes haven't been recorded yet.
-              p To record votes, go up to a poster, dial the number on it and hold your phone up against the speaker.
-              p Make sure you have registered your poster using the instructions on the back.
+            .field.has-addons
+                .control
+                  label.button.is-static(for="deviceFilter") Device
+                .control
+                  .select
+                    select(v-model="deviceFilter", id="deviceFilter")
+                      option(:value="null") All
+                      option(
+                        v-for="device in devices",
+                        :key="device.id",
+                        :value="device.id"
+                      ) {{ device.uuid }}
+            hr
+            template(v-if="hasVotes")
+              .option(v-for="option, index in filteredOptions")
+                label
+                  span.name {{option.text}}
+                  span.vote {{votesForOption(index)}}
+                    |  – {{votesForOption(index) / totalVotes | percentage}}
+                progress.progress.is-large(
+                  :value="votesForOption(index)",
+                  :max="totalVotes",
+                  :style="{ '--theme': '#' + poster.colour }"
+                )
+              p.has-text-right(v-if="lastUpdate") Last scanned {{ lastUpdate | dateAgo }}
+            .message.is-warning.votes(v-else)
+              .message-header
+                p No votes ... yet
+              .message-body
+                p This poster's votes haven't been recorded yet.
+                p To record votes, go up to a poster, dial the number on it and hold your phone up against the speaker.
+                p Make sure you have registered your poster using the instructions on the back.
   site-footer
 </template>
 
@@ -86,7 +100,10 @@ export default {
   data: () => ({
     votes: null,
     options: null,
+    deviceVotes: null,
+    devices: null,
     lastUpdate: null,
+    deviceFilter: null,
   }),
   computed: {
     posterId() {
@@ -107,18 +124,23 @@ export default {
     filteredOptions() {
       return !this.options ? [] : this.options.filter((o) => o.text)
     },
+    filteredVotes() {
+      return this.deviceFilter !== null
+        ? this.deviceVotes[this.deviceFilter]
+        : this.votes
+    },
     totalVotes() {
       if (!this.hasVotes) return 0
       let sumVotes = (sum, option, index) => {
-        let value = this.votes[index] || { vote: 0 }
+        let value = this.filteredVotes[index] || { vote: 0 }
         return sum + value.vote
       }
       return this.filteredOptions.reduce(sumVotes, 0)
     },
     hasVotes() {
-      const validVotes = this.votes.length === this.options.length
-      const hasValues = this.votes.some((v) => v.vote > 0)
-      return this.votes && this.options && validVotes && hasValues
+      const validVotes = this.filteredVotes.length === this.options.length
+      const hasValues = this.filteredVotes.some((v) => v.vote > 0)
+      return this.filteredVotes && this.options && validVotes && hasValues
     },
     currentUser() {
       return this.$store.state.currentUser
@@ -128,6 +150,11 @@ export default {
     },
     editRoute() {
       return { name: ROUTE_EDIT_POSTER, params: { id: this.posterId } }
+    },
+  },
+  watch: {
+    deviceFilter(newValue) {
+      console.log(newValue)
     },
   },
   mounted() {
@@ -154,11 +181,15 @@ export default {
       let { meta, data } = await sharedClient.get(`${this.posterURI}/votes`)
       if (meta.success) {
         this.votes = data.votes
+        this.devices = data.devices
+        this.deviceVotes = data.deviceVotes
         this.lastUpdate = data.lastUpdate
       }
     },
     votesForOption(index) {
-      return this.votes && this.votes[index] ? this.votes[index].vote : '~'
+      return this.filteredVotes && this.filteredVotes[index]
+        ? this.filteredVotes[index].vote
+        : '~'
     },
     printPoster() {
       // Open the poster pdf in a new tab
