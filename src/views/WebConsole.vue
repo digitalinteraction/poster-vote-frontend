@@ -25,9 +25,9 @@
           .level-item(v-if="port")
             button.button.is-danger(@click="reset") Reset
   
-  section.section.page-expand(v-if="!isAvailable")
+  section.section.page-expand
     .container
-      .message.is-warning
+      .message.is-warning(v-if="!isAvailable")
         .message-header Unavailable
         .message-body
           p
@@ -37,17 +37,26 @@
             a(href="https://caniuse.com/web-serial") More info
             | .
   
-  section.section.page-expand(v-else-if="port")
-    .container
       .content
         details
+          summary Instructions
+          .content
+            p You will need the special PosterVote USB device to use this console. Plugin the USB cable into your computer.
+            p Press "Connect" above and choose the device like 
+              code TTL232RG...
+            p Take the pins and place them against the pads on the device you want to read. 
+              | The pads are numbered 1, 2, 3, 4, 5 where MCLR is 1. 
+              | The pins should be yellow=4, black=3 &amp; red=1
+        details(v-if="port")
           summary Port info
           pre {{ port.getInfo() }}
-        details
+        details(v-if="port")
           summary Raw ({{ rawLines }})
           pre {{ raw }}
+      
       hr
-      .columns
+      
+      .columns(v-if="port")
         .column.content
           p Devices ({{ devices.length }})
           pre(v-for="device in devices") {{ device }}
@@ -55,10 +64,9 @@
           p Documents ({{ documents.length }})
           pre(v-for="document in documents") {{ document }}
   
-  section.section.page-expand(v-else)
+  section.section.page-expand(v-if="!port")
     .container
-      .content
-        pre Not connected
+      
   
   section.toolbar.is-sticky-bottom
     .container
@@ -224,7 +232,8 @@ export default {
       this.port = null
     },
     reset() {
-      this.data = []
+      this.devices = []
+      this.documents = []
       this.parser.reset()
       this.handlers.forEach((h) => h.reset())
     },
@@ -262,3 +271,9 @@ export default {
   },
 }
 </script>
+
+<style lang="sass">
+details > :not(summary)
+  border-left: 5px solid black
+  padding-left: 1em
+</style>
