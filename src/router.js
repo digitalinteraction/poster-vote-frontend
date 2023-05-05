@@ -8,6 +8,7 @@ import {
   ROUTE_SHOW_POSTER,
   ROUTE_ADD_POSTER,
   ROUTE_EDIT_POSTER,
+  ROUTE_WEB_CONSOLE,
 } from '@/const'
 
 Vue.use(Router)
@@ -49,6 +50,13 @@ const router = new Router({
       component: () =>
         import(/* webpackChunkName: "posters" */ './views/EditPoster.vue'),
       meta: { title: 'Edit Poster' },
+    },
+    {
+      path: '/console',
+      name: ROUTE_WEB_CONSOLE,
+      component: () =>
+        import(/* webpackChunkName: "console" */ './views/WebConsole.vue'),
+      meta: { title: 'Web Console' },
     },
   ],
 })

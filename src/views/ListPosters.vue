@@ -20,6 +20,7 @@
         .level-right(v-if="user")
           .level-item
             .buttons
+              router-link.button.is-link(:to="consoleRoute") Web console
               router-link.button.is-success(:to="addPosterRoute") Create poster
               button.button.is-danger(@click="logout") Logout
   
@@ -58,6 +59,7 @@ import {
   ROUTE_SHOW_POSTER,
   ROUTE_ADD_POSTER,
   ROUTE_HOME,
+  ROUTE_WEB_CONSOLE,
 } from '@/const'
 
 export default {
@@ -73,6 +75,9 @@ export default {
     },
     addPosterRoute() {
       return { name: ROUTE_ADD_POSTER }
+    },
+    consoleRoute() {
+      return { name: ROUTE_WEB_CONSOLE }
     },
   },
   mounted() {

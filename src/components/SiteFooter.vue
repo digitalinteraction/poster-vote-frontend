@@ -7,16 +7,20 @@ footer.footer
     p.links
       a(href="https://github.com/digitalinteraction/poster-vote#getting-a-device", target="_blank") Getting Devices
       a(href="https://github.com/digitalinteraction/poster-vote", target="_blank") Open Source
+      router-link(:to="consoleRoute") Web console
       span.version  version {{ appVersion }}
 </template>
 
 <script>
-import { ROUTE_ABOUT } from '@/const'
+import { ROUTE_ABOUT, ROUTE_WEB_CONSOLE } from '@/const'
 
 export default {
   computed: {
     aboutRoute() {
       return { name: ROUTE_ABOUT }
+    },
+    consoleRoute() {
+      return { name: ROUTE_WEB_CONSOLE }
     },
     appVersion() {
       return process.env.VUE_APP_VERSION
