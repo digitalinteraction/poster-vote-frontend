@@ -42,6 +42,11 @@
           summary Instructions
           .content
             p You will need the special PosterVote USB device to use this console. Plugin the USB cable into your computer.
+            blockquote The special USB cable is a 
+              a(href="https://ftdichip.com/products/ttl-232rg-vsw3v3-we/" target="_blank") TTL-232RG-VSW3V3-WE
+              |  device which you may need to download the 
+              a(href="https://ftdichip.com/drivers/d2xx-drivers/" target="_blank") drivers
+              |  to get your computer to connect to it.
             p Press "Connect" above and choose the device like 
               code TTL232RG...
             p Take the pins and place them against the pads on the device you want to read. 
