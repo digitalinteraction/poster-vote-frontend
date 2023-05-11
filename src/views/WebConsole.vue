@@ -41,17 +41,20 @@
         details
           summary Instructions
           .content
-            p You will need the special PosterVote USB device to use this console. Plugin the USB cable into your computer.
+            p You will need the special PosterVote USB cable to use this console. 
+              |  Plug in the USB cable into your computer, press "Connect" above and choose the device like 
+              code TTL232RG...
             blockquote The special USB cable is a 
               a(href="https://ftdichip.com/products/ttl-232rg-vsw3v3-we/" target="_blank") TTL-232RG-VSW3V3-WE
               |  device which you may need to download the 
               a(href="https://ftdichip.com/drivers/d2xx-drivers/" target="_blank") drivers
               |  to get your computer to connect to it.
-            p Press "Connect" above and choose the device like 
-              code TTL232RG...
-            p Take the pins and place them against the pads on the device you want to read. 
-              | The pads are numbered 1, 2, 3, 4, 5 where MCLR is 1. 
-              | The pins should be yellow=4, black=3 &amp; red=1
+            p Take the pins and place them against the pads on the PosterVote device you want to read. 
+              |  The pads are numbered 1, 2, 3, 4, 5 where MCLR is 1. 
+              |  The pins should be yellow=4, black=3 &amp; red=2
+            p With the pins attached to the pads, hold down the 1 and 3 buttons on the device until it beeps then release them to start the export.
+              |  The export is quite slow and is relative to the number of votes that have been captured.
+              |  Hold everything in place until the device stops flashing.
         details(v-if="port")
           summary Port info
           pre {{ port.getInfo() }}
