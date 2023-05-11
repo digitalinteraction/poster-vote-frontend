@@ -240,13 +240,10 @@ export default {
       this.port = null
     },
     reset() {
+      this.raw = ''
       this.devices = []
       this.documents = []
-      this.parser.reset()
       this.handlers.forEach((h) => h.reset())
-    },
-    onData(data) {
-      console.log('DATA', data)
     },
     async readPort(port) {
       while (port.readable) {
